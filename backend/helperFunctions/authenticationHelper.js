@@ -5,7 +5,7 @@ const hashPassword = async (plainPassword) => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedpassword = await bcrypt.hash(plainPassword, salt);
     return hashedpassword;
-  };
+};
 
 const comparePasswords = async (plainPassword, hashedPassword) => {
     return await bcrypt.compare(plainPassword, hashedPassword);
