@@ -31,7 +31,24 @@ const loginUser = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: "Login failed" });
     }
-  };
+};
+
+const saveDungeonDifficulty = async (req, res) => {
+    const { username, difficulty } = req.body;
+  
+    try {
+      const user = await User.findOneAndUpdate(
+        { username },
+        { dungeonDifficulty: difficulty },
+        { new: true }
+      );
+      if (!user) return res.status(404).json({ error: "User not found" });
+  
+      res.status(200).json({ message: "Dungeon difficulty updated" });
+    } catch (err) {
+      res.status(500).json({ error: "Update failed" });
+    }
+};
 
 module.exports = {
     signupUser,
