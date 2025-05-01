@@ -18,7 +18,6 @@ const signupUser = async (req, res) => {
         success: true,
         message: "User created",
         data: {
-            userId: user._id,
             username: user.username,
             dungeonDifficulty: user.dungeonDifficulty
       }
@@ -51,7 +50,6 @@ const loginUser = async (req, res) => {
         success: true,
         message: "Login successful",
         data: {
-            userId: user._id,
             username: user.username
       }
       });
