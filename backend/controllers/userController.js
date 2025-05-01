@@ -34,12 +34,12 @@ const loginUser = async (req, res) => {
 };
 
 const saveDungeonDifficulty = async (req, res) => {
-    const { username, difficulty } = req.body;
+    const { username, dungeonDifficulty } = req.body;
   
     try {
       const user = await User.findOneAndUpdate(
         { username },
-        { dungeonDifficulty: difficulty },
+        { dungeonDifficulty: dungeonDifficulty },
         { new: true }
       );
       if (!user) return res.status(404).json({ error: "User not found" });
