@@ -17,6 +17,23 @@ const signupUser = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+    const { username, password } = req.body;
+  
+    try {
+      const user = await User.findOne({ username }).select("+password");
+      if (!user) return res.status(400).json({ error: "User not found" });
+  
+      const isMatch = await comparePasswords(password, user.password);
+      if (!isMatch) return res.status(401).json({ error: "Invalid credentials" });
+  
+      res.status(200).json({ message: "Login successful", userId: user._id });
+    } catch (err) {
+      res.status(500).json({ error: "Login failed" });
+    }
+  };
+
 module.exports = {
-    signupUser
+    signupUser,
+    loginUser
   };
